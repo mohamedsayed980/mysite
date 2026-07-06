@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Sayed | Data Analyst & ML Engineer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      background: #1e293b;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #38bdf8; }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    .hero .avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 24px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+    }
+    .hero h2 {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: #94a3b8;
+      max-width: 560px;
+      margin: 0 auto 28px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 11px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+    .btn-primary:hover { background: #0ea5e9; transform: translateY(-2px); }
+    .btn-outline {
+      border: 2px solid #475569;
+      color: #94a3b8;
+    }
+    .btn-outline:hover {
+      border-color: #38bdf8;
+      color: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    /* ── Sections ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    section h2 {
+      font-size: 1.75rem;
+      color: #f1f5f9;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #38bdf8;
+      display: inline-block;
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    @media(max-width:640px){ .about-grid{ grid-template-columns:1fr; } }
+    .about-card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+      border-left: 4px solid #38bdf8;
+    }
+    .about-card h4 { color: #38bdf8; margin-bottom: 8px; }
+    .about-card p  { color: #94a3b8; font-size: 0.95rem; }
+
+    /* ── Projects ── */
+    .project-card {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+      border: 1px solid #334155;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+    }
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .project-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .project-title { color: #f1f5f9; font-size: 1.25rem; font-weight: 700; }
+    .project-subtitle { color: #38bdf8; font-size: 0.9rem; margin-top: 2px; }
+    .project-desc { color: #94a3b8; margin-bottom: 20px; line-height: 1.7; }
+    .project-quote {
+      background: #0f172a;
+      border-left: 3px solid #38bdf8;
+      padding: 12px 18px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      border: 1px solid #1e40af;
+    }
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: #0f172a;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-num { font-size: 1.3rem; font-weight: 700; color: #38bdf8; }
+    .stat-lbl { font-size: 0.75rem; color: #64748b; }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 20px;
+    }
+    .skill-group {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .skill-group h4 { color: #38bdf8; margin-bottom: 12px; }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+    .skill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media(max-width:640px){ .contact-grid{ grid-template-columns:1fr; } }
+    .contact-card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s;
+      border: 1px solid #334155;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      border-color: #38bdf8;
+    }
+    .contact-icon { font-size: 2rem; margin-bottom: 10px; }
+    .contact-label { color: #94a3b8; font-size: 0.9rem; margin-bottom: 4px; }
+    .contact-value { color: #38bdf8; font-weight: 600; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #475569;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="logo">MS</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="avatar">👨‍💻</div>
+  <h1>Mohamed Sayed</h1>
+  <h2>Data Analyst & ML Engineer</h2>
+  <p>
+    M.Sc. Mechanical Engineering (Production)<br>
+    Ain Shams University · Cairo, Egypt
+  </p>
+  <div class="hero-btns">
+    <a href="https://github.com/mohamedsayed980" target="_blank"
+       class="btn btn-primary">GitHub Profile</a>
+    <a href="#projects" class="btn btn-outline">View Projects</a>
+    <a href="#contact"  class="btn btn-outline">Contact Me</a>
+  </div>
+</div>
+
+<!-- ── About ── -->
+<section id="about">
+  <h2>👤 About Me</h2>
+  <p style="color:#94a3b8; margin-bottom:24px;">
+    I am a Data Analyst and Machine Learning Engineer with a deep background
+    in Mechanical Engineering. My unique combination of classical engineering
+    theory and modern data science lets me solve complex industrial problems
+    with both analytical rigor and practical tools.
+  </p>
+  <div class="about-grid">
+    <div class="about-card">
+      <h4>🎓 Education</h4>
+      <p>M.Sc. Mechanical Engineering (Production)<br>
+         Ain Shams University, Cairo, 1999<br>
+         Supervisor: Prof. Amin K. ELkharbotly</p>
+    </div>
+    <div class="about-card">
+      <h4>💼 Specialization</h4>
+      <p>Queueing Theory · Capacity Planning<br>
+         Machine Learning · Data Analysis<br>
+         Discrete-Event Simulation</p>
+    </div>
+    <div class="about-card">
+      <h4>🏭 Industry Focus</h4>
+      <p>Manufacturing Systems<br>
+         Operations Research<br>
+         Production Optimization</p>
+    </div>
+    <div class="about-card">
+      <h4>🌍 Location</h4>
+      <p>Cairo, Egypt<br>
+         Available for remote freelance<br>
+         & consulting projects</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Projects ── -->
+<section id="projects">
+  <h2>🚀 Projects</h2>
+
+  <!-- CATEGORY: Engineering -->
+  <h3 style="color:#38bdf8; margin:0 0 20px; font-size:1.2rem;">
+    🏭 Engineering & Simulation
+  </h3>
+
+  <!-- PROJECT 1: Queueing System -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-icon">🏭</div>
+      <div>
+        <div class="project-title">
+          Queueing-Oriented Capacity Planning System
+        </div>
+        <div class="project-subtitle">
+          Modernized 1999 M.Sc. Thesis → Professional Digital Twin Platform
+        </div>
+      </div>
+    </div>
+
+    <p class="project-desc">
+      What began as a static analytical study using queueing theory at
+      Ain Shams University in 1999 has been rebuilt — 25 years later —
+      into a fully interactive simulation platform. This project
+      demonstrates how classical industrial engineering theory remains
+      as powerful today as ever, when combined with modern tools.
+    </p>
+
+    <div class="project-quote">
+      "Good academic work never expires — it just needs modern tools
+      to come alive."
+    </div>
+
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">SimPy</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Plotly</span>
+      <span class="tag">SciPy</span>
+      <span class="tag">Queueing Theory</span>
+      <span class="tag">DES</span>
+      <span class="tag">Operations Research</span>
+    </div>
+
+    <div class="project-stats">
+      <div class="stat-box">
+        <div class="stat-num">9</div>
+        <div class="stat-lbl">Dashboard Tabs</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6</div>
+        <div class="stat-lbl">Python Modules</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6,622</div>
+        <div class="stat-lbl">Lines of Code</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">96.7%</div>
+        <div class="stat-lbl">Tests Passing</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">25</div>
+        <div class="stat-lbl">Years in Making</div>
+      </div>
+    </div>
+
+    <a href="https://github.com/mohamedsayed980/queueing-capacity-planning"
+       target="_blank" class="btn btn-primary">
+      🔗 View on GitHub
+    </a>
+  </div>
+
+  <!-- ADD MORE PROJECTS BELOW THIS LINE -->
+  <!-- Copy the project-card div above and paste here for new projects -->
+
+</section>
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <h2>🛠️ Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>💻 Languages</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Python</div>
+      <div class="skill-item"><div class="skill-dot"></div>SQL</div>
+      <div class="skill-item"><div class="skill-dot"></div>HTML/CSS</div>
+    </div>
+    <div class="skill-group">
+      <h4>🤖 ML & Data</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Scikit-learn</div>
+      <div class="skill-item"><div class="skill-dot"></div>Pandas / NumPy</div>
+      <div class="skill-item"><div class="skill-dot"></div>SciPy</div>
+    </div>
+    <div class="skill-group">
+      <h4>🔴 Simulation</h4>
+      <div class="skill-item"><div class="skill-dot"></div>SimPy (DES)</div>
+      <div class="skill-item"><div class="skill-dot"></div>Queueing Theory</div>
+      <div class="skill-item"><div class="skill-dot"></div>Digital Twin</div>
+    </div>
+    <div class="skill-group">
+      <h4>📊 Visualization</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Plotly</div>
+      <div class="skill-item"><div class="skill-dot"></div>Streamlit</div>
+      <div class="skill-item"><div class="skill-dot"></div>Matplotlib</div>
+    </div>
+    <div class="skill-group">
+      <h4>🏭 Engineering</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Capacity Planning</div>
+      <div class="skill-item"><div class="skill-dot"></div>Operations Research</div>
+      <div class="skill-item"><div class="skill-dot"></div>Job Shop Analysis</div>
+    </div>
+    <div class="skill-group">
+      <h4>🔧 Tools</h4>
+      <div class="skill-item"><div class="skill-dot"></div>GitHub</div>
+      <div class="skill-item"><div class="skill-dot"></div>VS Code</div>
+      <div class="skill-item"><div class="skill-dot"></div>Jupyter</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <h2>📬 Contact</h2>
+  <p style="color:#94a3b8; margin-bottom:28px;">
+    Available for freelance projects, consulting, and collaboration.
+  </p>
+  <div class="contact-grid">
+    <a href="mailto:mohamedsayed980@gmail.com" class="contact-card">
+      <div class="contact-icon">📧</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value">mohamedsayed980@gmail.com</div>
+    </a>
+    <a href="https://github.com/mohamedsayed980"
+       target="_blank" class="contact-card">
+      <div class="contact-icon">💻</div>
+      <div class="contact-label">GitHub</div>
+      <div class="contact-value">github.com/mohamedsayed980</div>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>© 2026 Mohamed Sayed · Cairo, Egypt</p>
+  <p style="margin-top:6px;">
+    <em>"Good academic work never expires —
+    it just needs modern tools to come alive."</em>
+  </p>
+</footer>
+
+</body>
+</html>
