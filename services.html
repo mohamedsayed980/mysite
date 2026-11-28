@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohamed Sayed | Data Analysis Services &amp; Pricing</title>
+<meta name="description" content="Fixed-price data analysis packages: data cleaning, KPI dashboards, analysis reports, manufacturing analytics. Request a quote.">
+<link rel="icon" type="image/png" href="M3_logo.png">
+<style>
+:root{--bg:#0f172a;--card:#1b2740;--line:#26334d;--acc:#38bdf8;--txt:#f1f5f9;--mut:#94a3b8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700}
+.brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 2px var(--acc)}
+button,.btn{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--acc);background:transparent;color:var(--acc);padding:8px 16px;text-decoration:none;display:inline-block}
+.btn.p{background:var(--acc);color:#0f172a;font-weight:700}
+.hero{text-align:center;padding:36px 0 18px}
+.hero h1{font-size:clamp(26px,5vw,44px);margin:0 0 10px}
+.hero p{color:var(--mut);max-width:640px;margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0}
+.tabs button.on{background:var(--acc);color:#0f172a;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column}
+.tier.pop{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.tier h3{margin:0;color:var(--acc)}
+.price{font-size:38px;font-weight:800;margin:8px 0 2px;direction:ltr;text-align:start}
+.days{color:var(--mut);margin-bottom:12px}
+.tier ul{padding:0;margin:0 0 18px;list-style:none;flex:1}
+.tier li{padding:5px 0 5px 0;border-bottom:1px solid var(--line)}
+.tier li:before{content:"✓ ";color:var(--acc)}
+.note{color:var(--mut);font-size:14px;text-align:center;margin:18px 0}
+h2{text-align:center;margin:44px 0 6px}
+form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form .full{grid-column:1/-1}
+label{display:block;font-size:14px;color:var(--mut);margin-bottom:4px}
+input,select,textarea{width:100%;background:#0f172a;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit}
+textarea{min-height:110px}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.terms div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px}
+footer{color:var(--mut);text-align:center;padding:36px 0;font-size:14px}
+@media(max-width:640px){form{grid-template-columns:1fr}}
+@media print{body{background:#fff;color:#000}.hero,.tabs,.grid,.terms,.note,.acts,footer,header button{display:none}form{background:#fff;border:1px solid #888}input,select,textarea{background:#fff;color:#000;border:1px solid #888}label{color:#333}.brand{color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><img src="M3_logo.png" alt="M3"><span>Mohamed Sayed</span></div><button id="lang">English</button></header>
+<section class="hero"><h1 id="h1"></h1><p id="sub"></p></section>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<p class="note" id="note"></p>
+<div class="terms" id="terms"></div>
+<h2 id="fh"></h2><p class="note" id="fs"></p>
+<form id="f" onsubmit="return false">
+<div><label id="l_name"></label><input id="name" required></div>
+<div><label id="l_contact"></label><input id="contact" required></div>
+<div class="full"><label id="l_pkg"></label><select id="pkg"></select></div>
+<div><label id="l_data"></label><select id="data"></select></div>
+<div><label id="l_dead"></label><input id="dead" type="date"></div>
+<div><label id="l_bud"></label><input id="bud"></div>
+<div><label id="l_rows"></label><input id="rows"></div>
+<div class="full"><label id="l_det"></label><textarea id="det"></textarea></div>
+<div class="full"><label><input type="checkbox" id="ok" style="width:auto"> <span id="l_ok"></span></label></div>
+<div class="full acts"><button class="btn p" id="wa"></button><button class="btn" id="em"></button><button class="btn" id="pr"></button></div>
+</form>
+<footer id="foot"></footer>
+</div>
+<script>
+/* ====== EDIT HERE: contacts and prices (USD) ====== */
+const WA="201157005841", MAIL="mohamed.sayed980@gmail.com";
+const CATS=[
+{id:"clean",t:["Data Cleaning","تنظيف البيانات"],tiers:[
+ {n:["Basic","أساسي"],p:"$40",d:"2",f:[["1 file, up to 5,000 rows","Duplicates, blanks, formats fixed"],["ملف واحد حتى 5,000 صف","معالجة التكرار والفراغات والتنسيق"]]},
+ {n:["Standard","قياسي"],p:"$100",d:"4",pop:1,f:[["Several files, up to 50,000 rows","Merged and documented rules"],["عدة ملفات حتى 50,000 صف","دمج وتوثيق القواعد المطبقة"]]},
+ {n:["Advanced","متقدم"],p:"$220+",d:"7+",f:[["Many sources, automated script","Repeatable every month"],["مصادر كثيرة وسكربت آلي","يمكن إعادة تشغيله شهرياً"]]}]},
+{id:"dash",t:["KPI Dashboards","لوحات المؤشرات"],tiers:[
+ {n:["Starter","بداية"],p:"$150",d:"5",f:[["1 page, up to 5 KPIs","Interactive charts and filters"],["صفحة واحدة حتى 5 مؤشرات","رسوم تفاعلية ومرشحات"]]},
+ {n:["Professional","احترافي"],p:"$350",d:"10",pop:1,f:[["Multi-page dashboard","Data cleaning included"],["لوحة متعددة الصفحات","يشمل تنظيف البيانات"]]},
+ {n:["Custom","مخصص"],p:"$700+",d:"15+",f:[["Custom app or automation","Live link you can share"],["تطبيق أو أتمتة مخصصة","رابط حي قابل للمشاركة"]]}]},
+{id:"ana",t:["Analysis & Reports","التحليل والتقارير"],tiers:[
+ {n:["Quick Insights","نظرة سريعة"],p:"$80",d:"3",f:[["Exploratory analysis","1-page summary of findings"],["تحليل استكشافي","ملخص من صفحة واحدة"]]},
+ {n:["Full Report","تقرير كامل"],p:"$220",d:"7",pop:1,f:[["Statistical tests included","PDF or Word report"],["يشمل اختبارات إحصائية","تقرير PDF أو Word"]]},
+ {n:["Predictive Model","نموذج تنبؤي"],p:"$450",d:"14",f:[["Model and evaluation","Interactive app to try it"],["نموذج مع تقييمه","تطبيق تفاعلي لتجربته"]]}]},
+{id:"mfg",t:["Manufacturing & Operations","التصنيع والعمليات"],tiers:[
+ {n:["OEE / Downtime Check","فحص OEE والتوقفات"],p:"$300",d:"7",f:[["OEE, downtime and defects","Top losses ranked (Pareto)"],["تحليل OEE والتوقفات والعيوب","ترتيب أكبر الخسائر (Pareto)"]]},
+ {n:["Capacity & Queueing","السعة والطوابير"],p:"$450",d:"10",pop:1,f:[["Queueing and capacity study","Staffing and bottleneck advice"],["دراسة الطوابير والسعة","توصيات التوظيف والاختناقات"]]},
+ {n:["Full Project","مشروع متكامل"],p:"$800+",d:"20+",f:[["Dashboard + analysis + report","Tailored to your plant"],["لوحة وتحليل وتقرير","مصمم لمصنعك"]]}]}
+];
+const T={
+ h1:["Data analysis with fixed prices and clear timelines","تحليل بيانات بأسعار ثابتة ومواعيد واضحة"],
+ sub:["Mechanical engineer with 34 years in manufacturing, now a data analyst. Pick a package or send me your request.","مهندس ميكانيكا بخبرة 34 عاماً في التصنيع، ويعمل الآن محلل بيانات. اختر باقة أو أرسل طلبك."],
+ note:["Prices are starting points in USD for a typical project. A fixed quote follows once I see a small sample of your data. EGP or SAR on request.","الأسعار تقريبية بالدولار لمشروع نموذجي، ويصلك عرض ثابت بعد أن أرى عينة صغيرة من بياناتك. ويمكن التسعير بالجنيه أو الريال."],
+ days:["days","أيام"],choose:["Choose","اختيار"],
+ terms:[["Deposit 50%, balance on delivery","دفعة مقدمة 50% والباقي عند التسليم"],["2 revision rounds included","جولتا تعديل مشمولتان"],["NDA available on request","اتفاقية سرية عند الطلب"],["Public, simulated or your own data","بيانات عامة أو محاكاة أو بياناتك"]],
+ fh:["Request a quote","اطلب عرض سعر"],fs:["Fill in the form and send it by WhatsApp or email. I reply with scope, price and timeline.","املأ النموذج وأرسله عبر واتساب أو الإيميل، وأرد عليك بالنطاق والسعر والمدة."],
+ l_name:["Your name","الاسم"],l_contact:["WhatsApp or email","واتساب أو إيميل"],l_pkg:["Package","الباقة"],l_data:["Data format","شكل البيانات"],l_dead:["Needed by","الموعد المطلوب"],l_bud:["Budget (optional)","الميزانية (اختياري)"],l_rows:["Approx. size (rows / files)","الحجم التقريبي (صفوف / ملفات)"],l_det:["What do you need? What question should the data answer?","ما المطلوب؟ وما السؤال الذي يجب أن تجيب عنه البيانات؟"],
+ l_ok:["I will not send sensitive personal data in the first message.","لن أرسل بيانات شخصية حساسة في الرسالة الأولى."],
+ pr:["Print / Save as PDF","طباعة / حفظ PDF"],wa:["Send via WhatsApp","إرسال عبر واتساب"],em:["Send via email","إرسال عبر الإيميل"],
+ data:[["Excel / CSV","Excel / CSV"],["Database","قاعدة بيانات"],["PDF / scanned","PDF / ممسوح"],["Not sure","لست متأكداً"]],
+ custom:["Not sure / custom request","لست متأكداً / طلب مخصص"],
+ need:["Please fill in your name and contact.","فضلاً أدخل الاسم ووسيلة التواصل."],
+ foot:["© Mohamed Sayed · Cairo, Egypt (UTC+2) · mohamedsayed980.github.io/mysite","© محمد سيد · القاهرة، مصر (UTC+2) · mohamedsayed980.github.io/mysite"],
+ hello:["Hello Mohamed, I would like a quote:","مرحباً أستاذ محمد، أرغب في عرض سعر:"]
+};
+let L=1, cur=0; // 1 = Arabic default, 0 = English
+const $=i=>document.getElementById(i);
+function render(){
+ const ar=L===1; document.documentElement.lang=ar?"ar":"en"; document.documentElement.dir=ar?"rtl":"ltr"; $("lang").textContent=ar?"English":"العربية";
+ ["h1","sub","note","fh","fs","l_name","l_contact","l_pkg","l_data","l_dead","l_bud","l_rows","l_det","l_ok","foot"].forEach(k=>$(k).textContent=T[k][L]);
+ $("pr").textContent=T.pr[L]; $("wa").textContent=T.wa[L]; $("em").textContent=T.em[L];
+ $("tabs").innerHTML=CATS.map((c,i)=>`<button class="${i===cur?"on":""}" onclick="cur=${i};render()">${c.t[L]}</button>`).join("");
+ $("grid").innerHTML=CATS[cur].tiers.map((t,j)=>`<div class="tier ${t.pop?"pop":""}"><h3>${t.n[L]}</h3><div class="price">${t.p}</div><div class="days">${t.d} ${T.days[L]}</div><ul>${t.f[L].map(x=>`<li>${x}</li>`).join("")}</ul><button class="btn p" onclick="pick(${j})">${T.choose[L]}</button></div>`).join("");
+ $("terms").innerHTML=T.terms.map(x=>`<div>${x[L]}</div>`).join("");
+ const keep=$("pkg").value;
+ $("pkg").innerHTML=CATS.map((c,i)=>c.tiers.map((t,j)=>`<option value="${i}-${j}">${c.t[L]} — ${t.n[L]} (${t.p}, ${t.d} ${T.days[L]})</option>`).join("")).join("")+`<option value="x">${T.custom[L]}</option>`;
+ if(keep)$("pkg").value=keep;
+ const dk=$("data").selectedIndex; $("data").innerHTML=T.data.map(x=>`<option>${x[L]}</option>`).join(""); $("data").selectedIndex=Math.max(dk,0);
+}
+function pick(j){$("pkg").value=cur+"-"+j;$("f").scrollIntoView({behavior:"smooth"})}
+function msg(){
+ const v=$("pkg").value, p=v==="x"?T.custom[L]:(()=>{const [i,j]=v.split("-");const c=CATS[i],t=c.tiers[j];return `${c.t[L]} — ${t.n[L]} (${t.p}, ${t.d} ${T.days[L]})`})();
+ return [T.hello[L],"",`${T.l_name[L]}: ${$("name").value}`,`${T.l_contact[L]}: ${$("contact").value}`,`${T.l_pkg[L]}: ${p}`,`${T.l_data[L]}: ${$("data").value}`,`${T.l_dead[L]}: ${$("dead").value||"-"}`,`${T.l_bud[L]}: ${$("bud").value||"-"}`,`${T.l_rows[L]}: ${$("rows").value||"-"}`,"",$("det").value].join("\n");
+}
+function ok(){if(!$("name").value.trim()||!$("contact").value.trim()){alert(T.need[L]);return false}return true}
+$("wa").onclick=()=>{if(ok())window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg()),"_blank")};
+$("em").onclick=()=>{if(ok())location.href="mailto:"+MAIL+"?subject="+encodeURIComponent("Quote request - "+$("name").value)+"&body="+encodeURIComponent(msg())};
+$("pr").onclick=()=>{if(ok())window.print()};
+$("lang").onclick=()=>{L=1-L;render()};
+render();
+</script>
+</body>
+</html>
